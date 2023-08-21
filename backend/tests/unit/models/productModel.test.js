@@ -2,7 +2,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 const connection = require('../../../src/models/connection');
 const { productModel } = require('../../../src/models');
-const { productsDB, productDBbyID } = require('../mocks/productMock.test');
+const { productsDB, productDBbyID } = require('../mocks/productMock');
 
 const { expect } = chai;
 

@@ -34,6 +34,6 @@ describe('Testes productModel', function () {
         const input = 'Chave do carro';
         const queryResult = await productModel.insertProduct(input);
         
-        expect(queryResult).to.equal(newProduct);
+        expect(queryResult).to.be.deep.equal(newProduct);
     });
 });

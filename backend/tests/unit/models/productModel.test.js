@@ -2,7 +2,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 const connection = require('../../../src/models/connection');
 const { productModel } = require('../../../src/models');
-const { productsDB, productDBbyID } = require('../mocks/productMock');
+const { productsDB, productDBbyID, newProduct } = require('../mocks/productMock');
 
 const { expect } = chai;
 
@@ -27,5 +27,13 @@ describe('Testes productModel', function () {
         
         expect(queryResult).to.be.an('object');
         expect(queryResult).to.be.deep.equal(productDBbyID);
+    });
+
+    it('Testando a funcao insertProduct para inserir um novo produto', async function () {
+        sinon.stub(connection, 'execute').resolves([newProduct]);
+        const input = 'Chave do carro';
+        const queryResult = await productModel.insertProduct(input);
+        
+        expect(queryResult).to.equal(newProduct);
     });
 });

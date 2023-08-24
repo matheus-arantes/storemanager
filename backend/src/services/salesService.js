@@ -21,7 +21,7 @@ const insertSales = async (sales) => {
     const salesId = await salesModel.findById(id);
     const allSales = salesId.map(({ productId, quantity }) => ({ productId, quantity }));
 
-    return { status: 'CREATED', data: { id, allSales } };
+    return { status: 'CREATED', data: { id, itemsSold: allSales } };
 };
 
 module.exports = {

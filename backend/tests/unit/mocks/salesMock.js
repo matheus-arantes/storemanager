@@ -26,4 +26,46 @@ const saleDBbyID = [
     },
   ];
 
-module.exports = { salesDB, saleDBbyID };
+const insertSaleInput = [
+  {
+    productId: 1,
+    quantity: 1,
+  },
+  {
+    productId: 2,
+    quantity: 5,
+  },
+];
+
+const insertSaleResult = {
+  id: 3,
+  itemsSold: [
+    {
+      productId: 1,
+      quantity: 1,
+    },
+    {
+      productId: 2,
+      quantity: 5,
+    },
+  ],
+};
+
+const salesResult = {
+  status: 'CREATED',
+  data: insertSaleResult,
+};
+
+const insertId = { insertId: 3 };
+
+const insertSaleId = 3;
+
+module.exports = {
+  salesDB,
+  saleDBbyID,
+  insertId,
+  insertSaleId,
+  insertSaleInput,
+  insertSaleResult,
+  salesResult,
+};

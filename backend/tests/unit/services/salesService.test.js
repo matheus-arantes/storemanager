@@ -2,11 +2,11 @@ const chai = require('chai');
 const sinon = require('sinon');
 const { salesModel } = require('../../../src/models');
 const { salesService } = require('../../../src/services');
-const { salesDB, saleDBbyID } = require('../mocks/salesMock');
+const { salesDB, saleDBbyID, insertSaleId, insertSaleInput, insertSaleResult } = require('../mocks/salesMock');
 
 const { expect } = chai;
 
-describe('Testes productService', function () {
+describe('Testes salesService', function () {
     afterEach(function () {
         sinon.restore();
     });
@@ -24,5 +24,14 @@ describe('Testes productService', function () {
         const { status, data } = await salesService.findById(idQuery);
         expect(status).to.be.equal('SUCCESSFUL');
         expect(data).to.be.deep.equal(saleDBbyID);
+    });
+
+    it('Testando a funcao insertSales inserir uma venda', async function () {
+        sinon.stub(salesModel, 'insertSales').resolves(insertSaleId);
+        sinon.stub(salesModel, 'findById').resolves(insertSaleInput);
+        const { status, data } = await salesService.insertSales(insertSaleInput);
+        
+        expect(status).to.equal('CREATED');
+        expect(data).to.deep.equal(insertSaleResult);
     });
 });

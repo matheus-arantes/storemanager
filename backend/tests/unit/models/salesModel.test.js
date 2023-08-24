@@ -2,7 +2,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 const connection = require('../../../src/models/connection');
 const { salesModel } = require('../../../src/models');
-const { salesDB, saleDBbyID } = require('../mocks/salesMock');
+const { salesDB, saleDBbyID, insertSaleInput, insertId, insertSaleId } = require('../mocks/salesMock');
 
 const { expect } = chai;
 
@@ -27,5 +27,12 @@ describe('Testes salesModel', function () {
         
         expect(queryResult).to.be.an('array');
         expect(queryResult).to.be.deep.equal(saleDBbyID);
+    });
+
+    it('Testando a funcao insertSales para inserir uma venda', async function () {
+        sinon.stub(connection, 'execute').resolves([insertId]);
+        const queryResult = await salesModel.insertSales(insertSaleInput);
+        
+        expect(queryResult).to.be.equal(insertSaleId);
     });
 });

@@ -2,32 +2,54 @@ const { productModel } = require('../models');
 
 const checkProductId = (req, res, next) => {
     const { body } = req;
-    body.map(({ productId }) => {
+    const idCheck = body.map(({ productId }) => {
         if (!productId) {
-            return res.status(400).json({ message: '"productId" is required' });
+            return;
         }
-        return null;
+        return true;
     });
-
+    if (!idCheck.every((productId) => productId === true)) {
+        return res.status(400).json({
+            message: '"productId" is required',
+        });
+    }
+     
     next();
 };
 
-/* const checkQuantity = (req, res, next) => {
+const checkQuantityExists = (req, res, next) => {
     const { body } = req;
-    body.map(({ quantity }) => {
-        if (!quantity) {
-            return res.status(400).json({ message: '"quantity" is required' });
+    const quantCheck = body.map(({ quantity }) => {
+        if (quantity === undefined) {
+            return;
         }
-        if (quantity.length <= 0) {
-            return res.status(422).json({
-                message: '"quantity" must be greater than or equal to 1',
-            });
-        }
-        return null;
+        return true;
     });
-    
+    if (!quantCheck.every((quantity) => quantity === true)) {
+        return res.status(400).json({
+            message: '"quantity" is required',
+        });
+    }
+     
     next();
-}; */
+};
+
+const checkQuantityLength = (req, res, next) => {
+    const { body } = req;
+    const quantCheck = body.map(({ quantity }) => {
+        if (quantity <= 0) {
+            return;
+        }
+        return true;
+    });
+    if (!quantCheck.every((quantity) => quantity === true)) {
+        return res.status(422).json({
+            message: '"quantity" must be greater than or equal to 1',
+        });
+    }
+     
+    next();
+};
 
 const checkDB = async (req, res, next) => {
     const { body } = req;
@@ -46,5 +68,7 @@ const checkDB = async (req, res, next) => {
 
 module.exports = {
     checkProductId,
+    checkQuantityExists,
+    checkQuantityLength,
     checkDB,
 };

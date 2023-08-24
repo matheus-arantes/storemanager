@@ -17,7 +17,8 @@ const findById = async (id) => {
 };
 
 const insertProduct = async (productName) => {
-    const product = await productModel.insertProduct(productName);
+    const id = await productModel.insertProduct(productName);
+    const product = await productModel.findById(id);
     return { status: 'CREATED', data: product };
 };
 

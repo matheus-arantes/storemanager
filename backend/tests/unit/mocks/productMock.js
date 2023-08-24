@@ -23,8 +23,14 @@ const newProduct = {
   name: 'Chave do carro',
 };
 
+const insertId = { insertId: 4 };
+
+const insertProductId = 4;
+
 module.exports = {
     productsDB,
     productDBbyID,
     newProduct,
+    insertProductId,
+    insertId,
 };

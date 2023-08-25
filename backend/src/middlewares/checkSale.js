@@ -34,7 +34,7 @@ const checkQuantityExists = (req, res, next) => {
     next();
 };
 
-const checkQuantityLength = (req, res, next) => {
+const checkQuantityValue = (req, res, next) => {
     const { body } = req;
     const quantCheck = body.map(({ quantity }) => {
         if (quantity <= 0) {
@@ -69,6 +69,6 @@ const checkDB = async (req, res, next) => {
 module.exports = {
     checkProductId,
     checkQuantityExists,
-    checkQuantityLength,
+    checkQuantityValue,
     checkDB,
 };

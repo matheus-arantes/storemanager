@@ -1,7 +1,7 @@
 const express = require('express');
 const { salesController } = require('../controllers');
 const { checkDB, checkProductId,
-    checkQuantityLength, checkQuantityExists } = require('../middlewares/checkSale');
+    checkQuantityExists, checkQuantityValue } = require('../middlewares/checkSale');
 
 const salesRouter = express.Router();
 
@@ -13,7 +13,7 @@ salesRouter.post(
     '/',
     checkProductId,
     checkQuantityExists,
-    checkQuantityLength,
+    checkQuantityValue,
     checkDB,
     salesController.insertSales,
     );
